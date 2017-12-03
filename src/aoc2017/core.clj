@@ -43,24 +43,17 @@
 (defn find-divisibles [list]
   (loop [test-number (first list)
          rest-of-list (rest list)]
-    (println test-number)
-    (println rest-of-list)
     (let [
           next-test-number (first rest-of-list)
           next-rest-of-list (flatten (conj (vec (rest rest-of-list)) test-number))
           divisible-found (is-divisible test-number rest-of-list)]
-      (println (str "next test " next-test-number))
-      (println (str "next list " (vec next-rest-of-list)))
-      (println (str "divisible list" (vec divisible-found)))
-      (println (str "divisible not empty?" (not (empty? divisible-found))))
       (if (not (empty? divisible-found))
         (cons test-number divisible-found)
         (recur next-test-number next-rest-of-list)))))
 
 (defn day2-2 [input-matrix]
   (let [matrix-of-divisible (map find-divisibles input-matrix)
-        matrix-of-divided (map (fn[lst] (/ (first lst) (second lst))) matrix-of-divisible)]
-    (println matrix-of-divided)
+        matrix-of-divided (map (fn [lst] (/ (first lst) (second lst))) matrix-of-divisible)]
     (reduce + matrix-of-divided)))
 
 
